@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 
 import Layout from "./Layout/Layout";
-import Navigation from "./Navigation/Navigation";
 import Movies from "../views/Movies";
 import MovieDetails from "../views/MovieDetails";
 import NotFound from "../views/NotFound";
@@ -19,9 +18,6 @@ class App extends Component {
   render() {
     return (
       <Layout>
-        <Navigation />
-        <hr />
-
         <Switch>
           {/* <Route path={route.home} exact component={Movies} /> */}
           <Route path={route.movies} exact component={Movies} />

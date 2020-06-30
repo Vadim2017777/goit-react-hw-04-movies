@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import movieAPI from '../services/movieAPI';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import movieAPI from "../services/movieAPI";
 
 const styles = {
-  display: 'grid',
-  gridTemplateColumns: ' 1fr 1fr 1fr',
+  display: "grid",
+  gridTemplateColumns: " 1fr 1fr 1fr",
   //   'grid-template-rows': ' auto ',
   maxWidth: 600,
-  marginLeft: 'auto',
-  marginRight: 'auto',
+  marginLeft: "auto",
+  marginRight: "auto",
   paddingRight: 12,
   paddingLeft: 12,
-  listStyle: 'none',
-  columnGap: '50px',
+  listStyle: "none",
+  columnGap: "50px",
 };
 
 export default class HomePage extends Component {
@@ -21,7 +21,7 @@ export default class HomePage extends Component {
   };
 
   componentDidMount() {
-    movieAPI.fetchMovieWeek().then(movies => this.setState({ movies }));
+    movieAPI.fetchMovieWeek().then((movies) => this.setState({ movies }));
   }
 
   render() {
@@ -29,14 +29,14 @@ export default class HomePage extends Component {
     const { match } = this.props;
     const showList = movies.length;
 
-    const src = 'https://image.tmdb.org/t/p/original/';
+    const src = "https://image.tmdb.org/t/p/original/";
     return (
       <>
         {showList > 0 && (
           <ul style={styles}>
-            {movies.map(movie => (
+            {movies.map((movie) => (
               <li key={movie.id}>
-                <Link to={`${match.url}/${movie.id}`}>
+                <Link to={`/movie/${match.url}/${movie.id}`}>
                   <img
                     src={`${src}/${movie.backdrop_path}`}
                     alt={movie.title}
