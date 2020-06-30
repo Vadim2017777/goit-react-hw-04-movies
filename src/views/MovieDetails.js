@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import movieAPI from '../services/movieAPI';
+import React, { Component } from "react";
+import movieAPI from "../services/movieAPI";
 
 export default class ShowDetails extends Component {
   state = { movie: null };
@@ -7,14 +7,26 @@ export default class ShowDetails extends Component {
   componentDidMount() {
     movieAPI
       .fetchMovieDetails(this.props.match.params.movieId)
-      .then(movie => this.setState({ movie }));
+      .then((movie) => this.setState({ movie }));
   }
+
+  handleGoBack = () => {
+    const { state } = this.props.location;
+    const { history } = this.props;
+    if (state && state.from) {
+      return history.push(state.from);
+    }
+    history.push("/");
+  };
 
   render() {
     const { movie } = this.state;
-    const src = 'https://image.tmdb.org/t/p/original/';
+    const src = "https://image.tmdb.org/t/p/original/";
     return (
       <div>
+        <button type="button" onClick={this.handleGoBack}>
+          Go back
+        </button>
         {movie && (
           <>
             <img src={`${src}/${movie.backdrop_path}`} alt={movie.title} />
