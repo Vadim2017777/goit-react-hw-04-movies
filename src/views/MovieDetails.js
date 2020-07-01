@@ -5,8 +5,9 @@ export default class ShowDetails extends Component {
   state = { movie: null };
 
   componentDidMount() {
+    const { movieId } = this.props.match.params;
     movieAPI
-      .fetchMovieDetails(this.props.match.params.movieId)
+      .fetchMovieDetails(movieId)
       .then((movie) => this.setState({ movie }));
   }
 
@@ -21,7 +22,7 @@ export default class ShowDetails extends Component {
 
   render() {
     const { movie } = this.state;
-    const src = "https://image.tmdb.org/t/p/original/";
+
     return (
       <div>
         <button type="button" onClick={this.handleGoBack}>
@@ -29,7 +30,10 @@ export default class ShowDetails extends Component {
         </button>
         {movie && (
           <>
-            <img src={`${src}/${movie.backdrop_path}`} alt={movie.title} />
+            <img
+              src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+              alt={movie.title}
+            />
             <h1>{movie.title}</h1>
             <div>{movie.release_date}</div>
             <div>{movie.popularity}%</div>

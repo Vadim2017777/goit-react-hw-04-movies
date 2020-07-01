@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Route } from "react-router-dom";
 
 import Searchbox from "../components/Searchbox/Searchbox";
-import MovieDetails from "../views/MovieDetails";
-
+import Loader from "../components/Loader/Loader";
 import queryParams from "../utils/getQueryParams";
 import movieAPI from "../services/movieAPI";
 
@@ -24,11 +22,13 @@ const styles = {
 export default class HomePage extends Component {
   state = {
     movies: [],
+    loading: false,
+    error: null,
   };
 
   componentDidMount() {
     const { query } = queryParams(this.props.location.search);
-    // movieAPI.fetchMovieWeek().then((movies) => this.setState({ movies }));
+
     if (query) {
       this.fetchMovieQuery(query);
     }
@@ -38,15 +38,18 @@ export default class HomePage extends Component {
     const { query: prevQuery } = queryParams(prevProps.location.search);
     const { query: nextQuery } = queryParams(this.props.location.search);
 
-    if (prevQuery !== nextQuery) {
+    if (prevQuery !== nextQuery && nextQuery !== undefined) {
       this.fetchMovieQuery(nextQuery);
     }
   }
 
   fetchMovieQuery(query) {
+    this.setState({ loading: true });
     movieAPI
       .fetchMovieSearch(query)
-      .then((movies) => this.setState({ movies }));
+      .then((movies) => this.setState({ movies }))
+      .catch((error) => this.setState({ error }))
+      .finally(() => this.setState({ loading: false }));
   }
 
   handleChangeQuery = (query) => {
@@ -57,19 +60,18 @@ export default class HomePage extends Component {
   };
 
   render() {
-    const { movies } = this.state;
+    const { movies, loading, error } = this.state;
     const { match } = this.props;
     const showList = movies.length;
-
-    const src = "https://image.tmdb.org/t/p/original/";
 
     return (
       <>
         <Searchbox onSubmit={this.handleChangeQuery} />
+        {error && <p>Somthing went wrong:{error.message}</p>}
         {showList > 0 && (
           <ul style={styles}>
             {movies.map((movie) => (
-              <li key={movie.id}>
+              <ul key={movie.id}>
                 <Link
                   to={{
                     pathname: `${match.url}/${movie.id}`,
@@ -77,16 +79,17 @@ export default class HomePage extends Component {
                   }}
                 >
                   <img
-                    src={`${src}/${movie.backdrop_path}`}
+                    src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
                     alt={movie.title}
                   ></img>
                   {movie.title}
                   {movie.name}
                 </Link>
-              </li>
+              </ul>
             ))}
           </ul>
         )}
+        {loading && <Loader />}
         {/* <Route path={`${match.path}/:showId`} component={InlineShowDetails} /> */}
       </>
     );
