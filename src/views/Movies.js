@@ -2,28 +2,16 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 import Searchbox from "../components/Searchbox/Searchbox";
+
+import styles from "./Views.module.css";
 import Loader from "../components/Loader/Loader";
+import { INITIAL_STATE_MOVIE } from "../components/helpers/constants";
 import queryParams from "../utils/getQueryParams";
 import movieAPI from "../services/movieAPI";
 
-const styles = {
-  display: "grid",
-  gridTemplateColumns: " 1fr 1fr 1fr",
-  //   'grid-template-rows': ' auto ',
-  maxWidth: 600,
-  marginLeft: "auto",
-  marginRight: "auto",
-  paddingRight: 12,
-  paddingLeft: 12,
-  listStyle: "none",
-  columnGap: "50px",
-};
-
-export default class HomePage extends Component {
+export default class Movie extends Component {
   state = {
-    movies: [],
-    loading: false,
-    error: null,
+    ...INITIAL_STATE_MOVIE,
   };
 
   componentDidMount() {
@@ -69,9 +57,9 @@ export default class HomePage extends Component {
         <Searchbox onSubmit={this.handleChangeQuery} />
         {error && <p>Somthing went wrong:{error.message}</p>}
         {showList > 0 && (
-          <ul style={styles}>
+          <ul>
             {movies.map((movie) => (
-              <ul key={movie.id}>
+              <li key={movie.id} className={styles.movie_list}>
                 <Link
                   to={{
                     pathname: `${match.url}/${movie.id}`,
@@ -85,12 +73,11 @@ export default class HomePage extends Component {
                   {movie.title}
                   {movie.name}
                 </Link>
-              </ul>
+              </li>
             ))}
           </ul>
         )}
         {loading && <Loader />}
-        {/* <Route path={`${match.path}/:showId`} component={InlineShowDetails} /> */}
       </>
     );
   }

@@ -1,0 +1,22 @@
+ul {
+  width: 400px;
+  display: inline-block;
+  list-style: none;
+  margin-right: 20px;
+}
+
+.Navigaton_list {
+  display: inline-block;
+  margin-right: 20px;
+  font-size: 24px;
+  color: aqua;
+}
+
+.Navigation_link {
+  text-decoration: none;
+  color: black;
+}
+
+.Navigation_link_active {
+  color: red;
+}

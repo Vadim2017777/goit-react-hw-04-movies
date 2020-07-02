@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 
+import { INITIAL_STATE_SEARCHBOX } from "../helpers/constants";
+
+import "../Searchbox/Searchbox.module.css";
+
 export default class Searchbox extends Component {
-  state = { value: "" };
+  state = { ...INITIAL_STATE_SEARCHBOX };
 
   handleChange = ({ target }) => {
     const { value } = target;

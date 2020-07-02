@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+import { INITIAL_STATE_HOMEPAGE } from "../components/helpers/constants";
 import movieAPI from "../services/movieAPI";
 import route from "../routes";
 
+import styles from "./Views.module.css";
+
 export default class HomePage extends Component {
   state = {
-    movies: [],
+    ...INITIAL_STATE_HOMEPAGE,
   };
 
   componentDidMount() {
@@ -26,10 +29,11 @@ export default class HomePage extends Component {
 
     return (
       <>
+        <h2 className={styles.home_title}>Trending today </h2>
         {
-          <ul>
+          <ul className={styles.home_menu}>
             {movies.map((movie) => (
-              <li key={movie.id}>
+              <li key={movie.id} className={styles.list_item_home}>
                 <Link
                   to={{
                     pathname: `${route.movies}/${movie.id}`,
