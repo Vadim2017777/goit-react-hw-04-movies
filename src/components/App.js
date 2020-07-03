@@ -1,29 +1,28 @@
-import React, { Component } from "react";
+import React, { Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 
 import Layout from "./Layout/Layout";
-import Home from "../views/Home";
-import Movies from "../views/Movies";
-import MovieDetails from "../views/MovieDetails";
+
 import NotFound from "../views/NotFound";
 
-import route from "../routes";
+import routes from "../routes.js";
 
 import "./App.css";
 
-class App extends Component {
-  render() {
-    return (
-      <Layout>
+const App = () => (
+  <Layout>
+    <>
+      <Suspense fallback={<h1>Loading...</h1>}>
         <Switch>
-          <Route path={route.home} exact component={Home} />
-          <Route path={route.movies} exact component={Movies} />
-          <Route path={route.movieDetails} component={MovieDetails} />
+          {routes.map((route) => (
+            <Route key={route.path} {...route} />
+          ))}
+
           <Route component={NotFound} />
         </Switch>
-      </Layout>
-    );
-  }
-}
+      </Suspense>
+    </>
+  </Layout>
+);
 
 export default App;

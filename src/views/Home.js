@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 import { INITIAL_STATE_HOMEPAGE } from "../components/helpers/constants";
+
 import movieAPI from "../services/movieAPI";
 import route from "../routes";
 
@@ -36,7 +37,7 @@ export default class HomePage extends Component {
               <li key={movie.id} className={styles.list_item_home}>
                 <Link
                   to={{
-                    pathname: `${route.movies}/${movie.id}`,
+                    pathname: `${"/movies"}/${movie.id}`,
                   }}
                 >
                   {movie.title}

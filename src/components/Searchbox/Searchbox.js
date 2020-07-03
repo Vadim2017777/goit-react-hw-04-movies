@@ -4,6 +4,8 @@ import { INITIAL_STATE_SEARCHBOX } from "../helpers/constants";
 
 import "../Searchbox/Searchbox.module.css";
 
+import PropTypes from "prop-types";
+
 export default class Searchbox extends Component {
   state = { ...INITIAL_STATE_SEARCHBOX };
 
@@ -32,3 +34,7 @@ export default class Searchbox extends Component {
     );
   }
 }
+
+Searchbox.propTypes = {
+  onSubmit: PropTypes.func,
+};

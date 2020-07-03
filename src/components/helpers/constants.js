@@ -2,10 +2,6 @@ const INITIAL_STATE_SEARCHBOX = {
   value: "",
 };
 
-const INITIAL_STATE_GALLERY = {
-  query: "",
-};
-
 const INITIAL_STATE_HOMEPAGE = {
   movies: [],
 };
