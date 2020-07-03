@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { INITIAL_STATE_HOMEPAGE } from "../components/helpers/constants";
 
 import movieAPI from "../services/movieAPI";
-import route from "../routes";
 
 import styles from "./Views.module.css";
 
