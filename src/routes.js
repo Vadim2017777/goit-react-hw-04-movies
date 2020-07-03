@@ -1,14 +1,6 @@
 import { lazy } from "react";
 
 export default [
-  // {
-  //   home: "/",
-  //   movies: "/movies",
-  //   movieDetails: "/movies/:movieId",
-  //   movieCast: "/movies/:movieId/cast",
-  //   movieReviews: "/:movieId/reviews",
-  // },
-
   {
     path: "/",
     label: "Home",
@@ -29,18 +21,4 @@ export default [
     exact: false,
     component: lazy(() => import("./views/MovieDetails")),
   },
-
-  // {
-  //   path: "/movies/:movieId/cast",
-  //   label: "MovieCast",
-  //   exact: false,
-  //   component: lazy(() => import("./views/InlineMovieCast")),
-  // },
-
-  // {
-  //   path: "/:movieId/reviews",
-  //   label: "MovieReview",
-  //   exact: false,
-  //   component: lazy(() => import("./views/InlineMovieReview")),
-  // },
 ];
