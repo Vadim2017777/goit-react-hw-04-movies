@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+import { INITIAL_STATE_MOVIE } from "../helpers/constants";
+
 import Searchbox from "../components/Searchbox/Searchbox";
+import Loader from "../components/Loader/Loader";
+
+import movieAPI from "../services/movieAPI";
+import queryParams from "../utils/getQueryParams";
 
 import styles from "./Views.module.css";
-import Loader from "../components/Loader/Loader";
-import { INITIAL_STATE_MOVIE } from "../components/helpers/constants";
-import queryParams from "../utils/getQueryParams";
-import movieAPI from "../services/movieAPI";
 
 export default class Movie extends Component {
   state = {
@@ -66,10 +68,20 @@ export default class Movie extends Component {
                     state: { from: this.props.location },
                   }}
                 >
-                  <img
-                    src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
-                    alt={movie.title}
-                  ></img>
+                  {movie.backdrop_path !== null ? (
+                    <img
+                      src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+                      alt={movie.title}
+                    ></img>
+                  ) : (
+                    <img
+                      src={
+                        "https://dummyimage.com/640x480/2a2a2a/ffffff&text=Product+image+placeholder"
+                      }
+                      alt={movie.title}
+                    ></img>
+                  )}
+
                   {movie.title}
                   {movie.name}
                 </Link>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import { INITIAL_STATE_HOMEPAGE } from "../components/helpers/constants";
+import { INITIAL_STATE_HOMEPAGE } from "../helpers/constants";
 
 import movieAPI from "../services/movieAPI";
 
@@ -13,22 +13,18 @@ export default class HomePage extends Component {
   };
 
   componentDidMount() {
-    movieAPI.fetchMovieWeek().then((movies) => this.setState({ movies }));
-  }
-
-  componentDidUpdate(prevProps) {}
-
-  fetchMovieQuery(query) {
     movieAPI
-      .fetchMovieSearch(query)
-      .then((movies) => this.setState({ movies }));
+      .fetchMovieWeek()
+      .then((movies) => this.setState({ movies }))
+      .catch((error) => this.setState({ error }));
   }
 
   render() {
-    const { movies } = this.state;
+    const { movies, error } = this.state;
 
     return (
       <>
+        {error && <p>Somthing went wrong:{error.message}</p>}
         <h2 className={styles.home_title}>Trending today </h2>
         {
           <ul className={styles.home_menu}>

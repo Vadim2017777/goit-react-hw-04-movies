@@ -1,10 +1,9 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-import { INITIAL_STATE_SEARCHBOX } from "../helpers/constants";
+import { INITIAL_STATE_SEARCHBOX } from "../../helpers/constants";
 
 import "../Searchbox/Searchbox.module.css";
-
-import PropTypes from "prop-types";
 
 export default class Searchbox extends Component {
   state = { ...INITIAL_STATE_SEARCHBOX };

@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { Route, Link } from "react-router-dom";
 
+import { INITIAL_STATE_MOVIEDETAILS } from "../helpers/constants";
+
 import InlineMovieCast from "../views/InlineMovieCast";
 import InlineMovieReview from "../views/InlineMovieReview";
 
-import { INITIAL_STATE_MOVIEDETAILS } from "../components/helpers/constants";
+
 import movieAPI from "../services/movieAPI";
 
 import styles from "./Views.module.css";
@@ -14,6 +16,7 @@ export default class ShowDetails extends Component {
 
   componentDidMount() {
     const { movieId } = this.props.match.params;
+
     movieAPI
       .fetchMovieDetails(movieId)
       .then((movie) => this.setState({ movie }))
@@ -79,6 +82,7 @@ export default class ShowDetails extends Component {
               <Link
                 to={{
                   pathname: `${match.url}/cast`,
+                  state: { from: this.props.location },
                 }}
               >
                 Cast
@@ -88,6 +92,7 @@ export default class ShowDetails extends Component {
               <Link
                 to={{
                   pathname: `${match.url}/review`,
+                  state: { from: this.props.location },
                 }}
               >
                 Review

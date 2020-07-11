@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
-import { INITIAL_STATE_MOVIECAST } from "../components/helpers/constants";
+import { INITIAL_STATE_MOVIECAST } from "../helpers/constants";
+
 import movieAPI from "../services/movieAPI";
 
 import styles from "./Views.module.css";

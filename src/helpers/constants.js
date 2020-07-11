@@ -4,6 +4,7 @@ const INITIAL_STATE_SEARCHBOX = {
 
 const INITIAL_STATE_HOMEPAGE = {
   movies: [],
+  error: null,
 };
 
 const INITIAL_STATE_MOVIECAST = {

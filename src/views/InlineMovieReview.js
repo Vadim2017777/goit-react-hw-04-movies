@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
-import { INITIAL_STATE_REVIEW } from "../components/helpers/constants";
+import { INITIAL_STATE_REVIEW } from "../helpers/constants";
+
 import movieAPI from "../services/movieAPI";
 
 import styles from "./Views.module.css";
